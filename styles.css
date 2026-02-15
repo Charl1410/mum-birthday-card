@@ -1,13 +1,19 @@
 :root { --bg1:#fff6e6; --bg2:#ffe3f1; --ink:#2b2b2b; --card:#ffffffcc; }
+
+html { width: 100%; box-sizing: border-box; }
 body{
-  margin:0; min-height:100vh; display:grid; place-items:center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color:var(--ink);
+  color: var(--ink);
   background: radial-gradient(circle at 20% 20%, var(--bg2), transparent 45%),
               radial-gradient(circle at 80% 30%, #e6f7ff, transparent 45%),
               radial-gradient(circle at 50% 80%, var(--bg1), transparent 55%),
               #fff;
-  overflow:hidden;
+  overflow: hidden;
 }
 .card{
   width:min(720px, 92vw);
@@ -24,7 +30,7 @@ p{ margin:10px 0; line-height:1.5; font-size: 16px; }
 .row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
 button{
   border:0; border-radius:999px;
-  padding:12px 16px; font-size:15px; cursor:pointer;
+  padding:8px 13px; font-size:15px; cursor:pointer;
   box-shadow: 0 10px 25px #00000012;
   background:#111; color:#fff;
   transition: transform .08s ease;
@@ -39,6 +45,7 @@ button:active{ transform: translateY(1px) scale(.99); }
 }
 .hidden{ display:none; }
 .memory{
+  position: absolute;
   margin-top:14px; padding:14px;
   border-radius:16px;
   background:#ffffff;
@@ -49,6 +56,10 @@ canvas{ position:fixed; inset:0; pointer-events:none; }
 
 /* --- Physical card (open on click) --- */
 .card-holder{
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
   perspective: 1400px;
   width: min(720px, 92vw);
   min-height: 420px;
@@ -71,6 +82,7 @@ canvas{ position:fixed; inset:0; pointer-events:none; }
   border-radius: 24px;
   box-shadow: 0 20px 60px #00000014;
   overflow: hidden;
+  min-height: 600px;
 }
 .card-cover{
   background: linear-gradient(145deg, #fff6e6 0%, #ffe3f1 50%, #e6f7ff 100%);
@@ -134,3 +146,87 @@ canvas{ position:fixed; inset:0; pointer-events:none; }
   box-shadow: 0 12px 30px #00000020;
 }
 .open-card-btn:active{ transform: translateY(1px) scale(0.99); }
+
+/* --- Carousel (card inside) --- */
+.carousel{
+  position: relative;
+  width:30%;
+  margin-top: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f8f8f8;
+  border: 1px solid #00000012;
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    width: 80%;
+  }
+}
+
+.carousel-track-wrap{
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4/3;
+  min-height: 240px;
+  max-height: 420px;
+}
+.carousel-track{
+  display: flex;
+  transition: transform 0.35s ease-out;
+  height: 100%;
+}
+.carousel-slide{
+  flex: 0 0 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+}
+.carousel-slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffffdd;
+  color: #111;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #00000020;
+  transition: background 0.2s, transform 0.2s;
+}
+.carousel-btn:hover{
+  background: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+.carousel-prev{ left: 8px; }
+.carousel-next{ right: 8px; }
+.carousel-dots{
+  display: none;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+}
+.carousel-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 0;
+  background: #00000030;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.carousel-dot:hover{ background: #00000050; }
+.carousel-dot.active{ background: #111; transform: scale(1.2); }

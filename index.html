@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Happy Birthday Mum 💛</title>
+  <link rel="stylesheet" href="reset.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -32,6 +33,17 @@
           <button id="celebrateBtn">Celebrate 🎉</button>
           <button class="secondary" id="hugBtn">Send a hug 🤗</button>
           <button class="secondary" id="memoryBtn">Open a memory ✨</button>
+        </div>
+
+        <div class="carousel" id="carousel">
+          <button type="button" class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous image">‹</button>
+          <div class="carousel-track-wrap">
+            <div class="carousel-track" id="carouselTrack">
+              <!-- slides injected by script from img folder -->
+            </div>
+          </div>
+          <button type="button" class="carousel-btn carousel-next" id="carouselNext" aria-label="Next image">›</button>
+          <div class="carousel-dots" id="carouselDots"></div>
         </div>
 
         <div id="memory" class="memory hidden"></div>
